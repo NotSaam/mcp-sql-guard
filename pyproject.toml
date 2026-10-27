@@ -1,0 +1,30 @@
+[project]
+name = "mcp-sql-guard"
+version = "0.1.0"
+description = "Read-only MCP server for SQL with per-caller row, column and table access control"
+readme = "README.md"
+authors = [
+    { name = "Samu", email = "samuel.fuentes.baio@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=2.3",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.21,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "anyio>=4.15.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.1",
+]
+
+[project.scripts]
+mcp-sql-guard = "mcp_sql_guard.server:main"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

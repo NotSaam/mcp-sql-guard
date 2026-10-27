@@ -1,0 +1,40 @@
+{
+  "roles": {
+    "staff": {
+      "tables": {
+        "clubs": { "row_filter": "id = :club_id" },
+        "players": { "row_filter": "club_id = :club_id", "hidden_columns": ["salary_eur"] },
+        "sessions": { "row_filter": "club_id = :club_id" },
+        "medical_notes": {
+          "row_filter": "player_id IN (SELECT id FROM main.players WHERE club_id = :club_id)"
+        }
+      }
+    },
+    "player": {
+      "tables": {
+        "players": { "row_filter": "id = :player_id", "hidden_columns": ["salary_eur"] },
+        "sessions": { "row_filter": "player_id = :player_id" }
+      }
+    }
+  },
+  "principals": [
+    {
+      "name": "staff-atlantico",
+      "role": "staff",
+      "attributes": { "club_id": 1 },
+      "token_sha256": "db6eba4bcdbe07dac014af65456a1bb2588d2d7adedc2707a709ac5bfaa74d9d"
+    },
+    {
+      "name": "staff-interior",
+      "role": "staff",
+      "attributes": { "club_id": 2 },
+      "token_sha256": "5236bb417cee202fdbf16edf37b7a705f4dadd95f75dee6d84fec65cd7eaa3cf"
+    },
+    {
+      "name": "player-iker",
+      "role": "player",
+      "attributes": { "player_id": 1 },
+      "token_sha256": "24ece9b91d3a8761486a28aa7ae82f4d69cb83c68652b94f7a439fffb417ce95"
+    }
+  ]
+}
